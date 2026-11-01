@@ -1,0 +1,756 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>AI Disaster Dashboard</title>
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='style.css') }}"
+    >
+
+</head>
+
+
+<body>
+
+
+    <!-- Back Button -->
+
+    <a href="/" class="back-button">
+        ← Report New Disaster
+    </a>
+
+
+    <!-- Dashboard Header -->
+
+    <h1>
+        AI Disaster Dashboard
+    </h1>
+
+    <p>
+        AI-powered disaster assessment and response monitoring system.
+    </p>
+
+
+
+    <!-- Filters -->
+
+    <div class="filter-buttons">
+
+        <a href="/dashboard">
+            All
+        </a>
+
+        <a href="/dashboard?status=active">
+            Active
+        </a>
+
+        <a href="/dashboard?status=resolved">
+            Resolved
+        </a>
+
+        <a href="/dashboard?priority=High">
+            High Priority
+        </a>
+
+        <a href="/dashboard?priority=Normal">
+            Normal Priority
+        </a>
+
+    </div>
+
+
+
+    <!-- Statistics -->
+
+    <div class="stats-container">
+
+
+        <div class="stat-card">
+
+            <h3>
+                Total Disasters
+            </h3>
+
+            <p>
+                {{ total_disasters }}
+            </p>
+
+        </div>
+
+
+
+        <div class="stat-card">
+
+            <h3>
+                Active Disasters
+            </h3>
+
+            <p>
+                {{ active_disasters }}
+            </p>
+
+        </div>
+
+
+
+        <div class="stat-card">
+
+            <h3>
+                Critical Disasters
+            </h3>
+
+            <p>
+                {{ critical_disasters }}
+            </p>
+
+        </div>
+
+
+    </div>
+
+
+
+    <!-- AI Risk Overview -->
+
+    <div class="risk-summary">
+
+        <h2>
+            AI Risk Overview
+        </h2>
+
+        <p>
+            Current disaster risk distribution based on AI severity assessment.
+        </p>
+
+
+        <div class="risk-container">
+
+
+            <!-- Critical Risk -->
+
+            <div class="risk-card risk-critical">
+
+                <h3>
+                    Critical
+                </h3>
+
+                <p>
+                    {{ critical_disasters }}
+                </p>
+
+                <span>
+                    Immediate attention required
+                </span>
+
+            </div>
+
+
+
+            <!-- High Risk -->
+
+            <div class="risk-card risk-high">
+
+                <h3>
+                    High
+                </h3>
+
+                <p>
+                    {{ high_disasters }}
+                </p>
+
+                <span>
+                    Urgent response required
+                </span>
+
+            </div>
+
+
+
+            <!-- Medium Risk -->
+
+            <div class="risk-card risk-medium">
+
+                <h3>
+                    Medium
+                </h3>
+
+                <p>
+                    {{ medium_disasters }}
+                </p>
+
+                <span>
+                    Monitoring required
+                </span>
+
+            </div>
+
+
+
+            <!-- Low Risk -->
+
+            <div class="risk-card risk-low">
+
+                <h3>
+                    Low
+                </h3>
+
+                <p>
+                    {{ low_disasters }}
+                </p>
+
+                <span>
+                    Routine monitoring
+                </span>
+
+            </div>
+
+
+        </div>
+
+    </div>
+
+
+
+    <!-- Severity Distribution -->
+
+    <div class="chart-container">
+
+        <h2>
+            Severity Distribution
+        </h2>
+
+
+        <canvas
+            id="severityChart"
+            data-critical="{{ critical_disasters }}"
+            data-high="{{ high_disasters }}"
+            data-medium="{{ medium_disasters }}"
+            data-low="{{ low_disasters }}"
+        ></canvas>
+
+    </div>
+
+
+
+    <!-- Disaster Type Distribution -->
+
+    <div class="chart-container">
+
+        <h2>
+            Disaster Type Distribution
+        </h2>
+
+
+        <div
+            style="
+                width: 100%;
+                height: 400px;
+                margin-top: 20px;
+            "
+        >
+
+            <canvas id="disasterTypeChart"></canvas>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- Disaster Type Data -->
+
+    <script
+        id="disasterTypeData"
+        type="application/json"
+    >{{ disaster_type_data | tojson }}</script>
+
+
+
+    <!-- Disaster List -->
+
+    {% if disasters %}
+
+
+        {% for disaster in disasters %}
+
+
+            <div class="disaster-card severity-{{ disaster.severity|lower }}">
+
+
+                <!-- Disaster Name -->
+
+                <h2>
+                    {{ disaster.name }}
+                </h2>
+
+
+
+                <!-- Location -->
+
+                <p>
+
+                    <strong>
+                        Location:
+                    </strong>
+
+                    {{ disaster.location }}
+
+                </p>
+
+
+
+                <!-- Description -->
+
+                <p>
+
+                    <strong>
+                        Description:
+                    </strong>
+
+                    {{ disaster.description }}
+
+                </p>
+
+
+
+                <!-- AI Predicted Severity -->
+
+                <p>
+
+                    <strong>
+                        AI Predicted Severity:
+                    </strong>
+
+
+                    <span
+                        class="severity-badge severity-{{ disaster.severity|lower }}"
+                    >
+
+                        {{ disaster.severity }}
+
+                    </span>
+
+                </p>
+
+
+
+                <!-- Priority -->
+
+                <p>
+
+                    <strong>
+                        Priority:
+                    </strong>
+
+
+                    <span
+                        class="priority-{{ disaster.priority|lower }}"
+                    >
+
+                        {{ disaster.priority }}
+
+                    </span>
+
+                </p>
+
+
+
+                <!-- Status -->
+
+                <p>
+
+                    <strong>
+                        Status:
+                    </strong>
+
+
+                    <span
+                        class="status-{{ disaster.status|lower }}"
+                    >
+
+                        {{ disaster.status }}
+
+                    </span>
+
+                </p>
+
+
+
+                <!-- Disaster Information -->
+
+                {% if disaster.people_affected is defined %}
+
+
+                    <hr>
+
+
+                    <h3>
+                        Disaster Information
+                    </h3>
+
+
+                    <p>
+
+                        <strong>
+                            People Affected:
+                        </strong>
+
+                        {{ disaster.people_affected }}
+
+                    </p>
+
+
+
+                    <p>
+
+                        <strong>
+                            Duration:
+                        </strong>
+
+                        {{ disaster.duration_hours }}
+
+                        hours
+
+                    </p>
+
+
+
+                    <p>
+
+                        <strong>
+                            Infrastructure Damage:
+                        </strong>
+
+                        {{ disaster.infrastructure_damage }}
+
+                    </p>
+
+
+
+                    <p>
+
+                        <strong>
+                            Weather Condition:
+                        </strong>
+
+                        {{ disaster.weather_condition }}
+
+                    </p>
+
+
+
+                    <p>
+
+                        <strong>
+                            Evacuation Required:
+                        </strong>
+
+                        {{ disaster.evacuation_required }}
+
+                    </p>
+
+
+                {% endif %}
+
+
+
+                <!-- Response Recommendation -->
+
+                {% if disaster.response %}
+
+
+                    <hr>
+
+
+                    <h3>
+                        Response Recommendation
+                    </h3>
+
+
+                    <p>
+                        {{ disaster.response }}
+                    </p>
+
+
+                {% endif %}
+
+
+
+                <!-- Resolve Button -->
+
+                {% if disaster.status == "active" %}
+
+
+                    <form
+                        action="/resolve-disaster/{{ disaster._id }}"
+                        method="POST"
+                    >
+
+                        <button
+                            type="submit"
+                            class="resolve-button"
+                        >
+
+                            Mark as Resolved
+
+                        </button>
+
+                    </form>
+
+
+                {% endif %}
+
+
+            </div>
+
+
+        {% endfor %}
+
+
+    {% else %}
+
+
+        <p>
+            No disasters reported yet.
+        </p>
+
+
+    {% endif %}
+
+
+
+    <!-- Chart.js -->
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+
+
+    <script>
+
+
+        /* =========================================
+           SEVERITY DISTRIBUTION
+        ========================================= */
+
+
+        const severityCanvas =
+            document.getElementById(
+                "severityChart"
+            );
+
+
+        const criticalCount =
+            Number(
+                severityCanvas.dataset.critical
+            );
+
+
+        const highCount =
+            Number(
+                severityCanvas.dataset.high
+            );
+
+
+        const mediumCount =
+            Number(
+                severityCanvas.dataset.medium
+            );
+
+
+        const lowCount =
+            Number(
+                severityCanvas.dataset.low
+            );
+
+
+        new Chart(
+            severityCanvas,
+            {
+
+                type: "bar",
+
+
+                data: {
+
+                    labels: [
+                        "Critical",
+                        "High",
+                        "Medium",
+                        "Low"
+                    ],
+
+
+                    datasets: [
+
+                        {
+
+                            label:
+                                "Number of Disasters",
+
+
+                            data: [
+
+                                criticalCount,
+
+                                highCount,
+
+                                mediumCount,
+
+                                lowCount
+
+                            ]
+
+                        }
+
+                    ]
+
+                },
+
+
+                options: {
+
+                    responsive: true,
+
+
+                    scales: {
+
+                        y: {
+
+                            beginAtZero: true,
+
+
+                            ticks: {
+
+                                precision: 0
+
+                            }
+
+                        }
+
+                    }
+
+                }
+
+            }
+        );
+
+
+
+        /* =========================================
+           DISASTER TYPE DISTRIBUTION
+        ========================================= */
+
+
+        const disasterTypeDataElement =
+            document.getElementById(
+                "disasterTypeData"
+            );
+
+
+        const disasterTypeData =
+            JSON.parse(
+                disasterTypeDataElement.textContent
+            );
+
+
+        const disasterTypeLabels =
+            disasterTypeData.map(
+                function(item) {
+
+                    return item._id;
+
+                }
+            );
+
+
+        const disasterTypeCounts =
+            disasterTypeData.map(
+                function(item) {
+
+                    return item.count;
+
+                }
+            );
+
+
+        const disasterTypeCanvas =
+            document.getElementById(
+                "disasterTypeChart"
+            );
+
+
+        new Chart(
+            disasterTypeCanvas,
+            {
+
+                type: "bar",
+
+
+                data: {
+
+                    labels:
+                        disasterTypeLabels,
+
+
+                    datasets: [
+
+                        {
+
+                            label:
+                                "Number of Disasters",
+
+
+                            data:
+                                disasterTypeCounts
+
+                        }
+
+                    ]
+
+                },
+
+
+                options: {
+
+                    responsive: true,
+
+
+                    maintainAspectRatio: false,
+
+
+                    scales: {
+
+                        y: {
+
+                            beginAtZero: true,
+
+
+                            ticks: {
+
+                                precision: 0
+
+                            }
+
+                        }
+
+                    }
+
+                }
+
+            }
+        );
+
+
+    </script>
+
+
+</body>
+
+</html>

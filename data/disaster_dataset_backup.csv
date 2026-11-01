@@ -1,0 +1,11 @@
+disaster_type,description,location,people_affected,duration_hours,infrastructure_damage,weather_condition,evacuation_required,severity
+Flood,"Heavy rainfall has flooded several residential areas and blocked major roads.",Dhaka,5000,12,High,Rainy,Yes,Critical
+Earthquake,"A strong earthquake damaged buildings and caused injuries in multiple neighborhoods.",Kathmandu,3000,2,High,Clear,Yes,Critical
+Fire,"A large fire broke out in a commercial building and nearby residents were evacuated.",Dhaka,800,4,High,Clear,Yes,High
+Flood,"Moderate flooding has affected roads and several local shops after continuous rain.",Chittagong,700,8,Medium,Rainy,No,Medium
+Landslide,"A small landslide blocked a rural road after heavy rainfall but no major injuries were reported.",Sylhet,100,3,Low,Rainy,No,Low
+Cyclone,"A powerful cyclone is approaching coastal areas with strong winds and heavy rainfall.",Khulna,12000,18,High,Storm,Yes,Critical
+Flood,"Minor waterlogging has affected a few streets after short periods of rainfall.",Rajshahi,150,4,Low,Rainy,No,Low
+Earthquake,"A moderate earthquake caused cracks in several old buildings but no major injuries.",Chittagong,600,1,Medium,Clear,No,Medium
+Fire,"A small fire was contained quickly inside a local shop with limited property damage.",Sylhet,50,1,Low,Clear,No,Low
+Landslide,"Heavy rain caused a landslide that damaged houses and blocked an important road.",Rangamati,2500,10,High,Rainy,Yes,High

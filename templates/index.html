@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>AI Disaster Response and Relief Planner</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+    <h1>AI Disaster Response and Relief Planner</h1>
+
+    <p>Report a disaster and let the AI system assess its severity.</p>
+
+
+    <form action="/report-disaster" method="POST">
+
+        <!-- Disaster Type -->
+        <label for="name">Disaster Type</label>
+
+        <select id="name" name="name" required>
+            <option value="">Select disaster type</option>
+            <option value="Flood">Flood</option>
+            <option value="Earthquake">Earthquake</option>
+            <option value="Fire">Fire</option>
+            <option value="Landslide">Landslide</option>
+            <option value="Cyclone">Cyclone</option>
+        </select>
+
+        <br><br>
+
+
+        <!-- Location -->
+        <label for="location">Location</label>
+
+        <input
+            type="text"
+            id="location"
+            name="location"
+            placeholder="Example: Dhaka"
+            required
+        >
+
+        <br><br>
+
+
+        <!-- Description -->
+        <label for="description">Description</label>
+
+        <br>
+
+        <textarea
+            id="description"
+            name="description"
+            rows="5"
+            placeholder="Describe the disaster situation..."
+            required
+        ></textarea>
+
+        <br><br>
+
+
+        <!-- People Affected -->
+        <label for="people_affected">People Affected</label>
+
+        <input
+            type="number"
+            id="people_affected"
+            name="people_affected"
+            min="0"
+            placeholder="Example: 500"
+            required
+        >
+
+        <br><br>
+
+
+        <!-- Duration -->
+        <label for="duration_hours">Duration (hours)</label>
+
+        <input
+            type="number"
+            id="duration_hours"
+            name="duration_hours"
+            min="0"
+            placeholder="Example: 12"
+            required
+        >
+
+        <br><br>
+
+
+        <!-- Infrastructure Damage -->
+        <label for="infrastructure_damage">
+            Infrastructure Damage
+        </label>
+
+        <select
+            id="infrastructure_damage"
+            name="infrastructure_damage"
+            required
+        >
+            <option value="">Select damage level</option>
+            <option value="None">None</option>
+            <option value="Low">Low</option>
+            <option value="Medium">Medium</option>
+            <option value="High">High</option>
+        </select>
+
+        <br><br>
+
+
+        <!-- Weather Condition -->
+        <label for="weather_condition">
+            Weather Condition
+        </label>
+
+        <select
+            id="weather_condition"
+            name="weather_condition"
+            required
+        >
+            <option value="">Select weather condition</option>
+            <option value="Clear">Clear</option>
+            <option value="Rainy">Rainy</option>
+            <option value="Storm">Storm</option>
+        </select>
+
+        <br><br>
+
+
+        <!-- Evacuation -->
+        <label for="evacuation_required">
+            Evacuation Required
+        </label>
+
+        <select
+            id="evacuation_required"
+            name="evacuation_required"
+            required
+        >
+            <option value="">Select option</option>
+            <option value="Yes">Yes</option>
+            <option value="No">No</option>
+        </select>
+
+        <br><br>
+
+
+        <button type="submit">
+            Analyze Disaster with AI
+        </button>
+
+    </form>
+
+</body>
+</html>

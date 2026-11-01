@@ -1,0 +1,329 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f7f9;
+    text-align: center;
+    margin-top: 100px;
+}
+
+h1 {
+    color: #1f4e79;
+}
+
+p {
+    font-size: 18px;
+    color: #555;
+}
+.disaster-card {
+    width: 70%;
+    margin: 25px auto;
+    padding: 25px;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+    text-align: left;
+}
+
+.disaster-card h2 {
+    margin-top: 0;
+    color: #1f4e79;
+}
+
+.disaster-card p {
+    margin: 10px 0;
+    font-size: 18px;
+}
+
+.disaster-card strong {
+    color: #333;
+}
+.severity-critical {
+    border-left: 8px solid #b00020;
+}
+
+.severity-high {
+    border-left: 8px solid #ff6b00;
+}
+
+.severity-medium {
+    border-left: 8px solid #f0c000;
+}
+
+.severity-low {
+    border-left: 8px solid #2e8b57;
+}
+.back-button {
+    display: inline-block;
+    margin: 20px;
+    padding: 10px 18px;
+    background: #1f4e79;
+    color: white;
+    text-decoration: none;
+    border-radius: 6px;
+}
+
+.back-button:hover {
+    opacity: 0.85;
+}
+.stats-container {
+    width: 70%;
+    margin: 25px auto;
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+}
+
+.stat-card {
+    flex: 1;
+    padding: 20px;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+    text-align: center;
+}
+
+.stat-card h3 {
+    margin: 0 0 10px 0;
+    font-size: 18px;
+}
+
+.stat-card p {
+    margin: 0;
+    font-size: 32px;
+    font-weight: bold;
+}
+.resolve-button {
+    margin-top: 10px;
+    padding: 10px 16px;
+    border: none;
+    border-radius: 6px;
+    background: #2e8b57;
+    color: white;
+    cursor: pointer;
+    font-size: 15px;
+}
+
+.resolve-button:hover {
+    opacity: 0.85;
+}
+.priority-high {
+    font-weight: bold;
+    color: #b00020;
+}
+
+.priority-normal {
+    font-weight: bold;
+    color: #2e8b57;
+}
+.status-active {
+    font-weight: bold;
+    color: #b00020;
+}
+
+.status-resolved {
+    font-weight: bold;
+    color: #2e8b57;
+}
+/* =========================================================
+   AI Risk Overview
+========================================================= */
+
+.risk-summary {
+    margin: 30px 0;
+    padding: 30px;
+    background: #ffffff;
+    border-radius: 16px;
+    box-shadow: 0 5px 18px rgba(0, 0, 0, 0.08);
+}
+
+.risk-summary h2 {
+    text-align: center;
+    margin-bottom: 8px;
+    font-size: 28px;
+}
+
+.risk-summary > p {
+    text-align: center;
+    color: #666;
+    margin-bottom: 25px;
+}
+
+
+.risk-container {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+}
+
+
+/* Risk Cards */
+
+.risk-card {
+    padding: 25px 20px;
+    border-radius: 14px;
+    text-align: center;
+    border-left: 6px solid;
+    background: #f8f9fa;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+
+.risk-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+}
+
+
+.risk-card h3 {
+    margin: 0 0 12px;
+    font-size: 22px;
+}
+
+
+.risk-card p {
+    margin: 5px 0;
+    font-size: 38px;
+    font-weight: bold;
+}
+
+
+.risk-card span {
+    display: block;
+    margin-top: 8px;
+    font-size: 14px;
+    color: #666;
+}
+
+
+/* Critical */
+
+.risk-critical {
+    border-left-color: #dc2626;
+    background: #fff1f2;
+}
+
+.risk-critical h3 {
+    color: #b91c1c;
+}
+
+
+/* High */
+
+.risk-high {
+    border-left-color: #f97316;
+    background: #fff7ed;
+}
+
+.risk-high h3 {
+    color: #c2410c;
+}
+
+
+/* Medium */
+
+.risk-medium {
+    border-left-color: #eab308;
+    background: #fefce8;
+}
+
+.risk-medium h3 {
+    color: #a16207;
+}
+
+
+/* Low */
+
+.risk-low {
+    border-left-color: #16a34a;
+    background: #f0fdf4;
+}
+
+.risk-low h3 {
+    color: #15803d;
+}
+
+
+/* =========================================================
+   Responsive Design
+========================================================= */
+
+@media (max-width: 900px) {
+
+    .risk-container {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+}
+
+
+@media (max-width: 600px) {
+
+    .risk-container {
+        grid-template-columns: 1fr;
+    }
+
+}
+/* Severity Distribution Chart */
+
+.chart-container {
+    margin: 30px auto;
+    padding: 25px;
+    max-width: 900px;
+    border-radius: 12px;
+}
+
+.chart-container h2 {
+    margin-bottom: 20px;
+}
+
+.severity-chart {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.chart-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 14px 18px;
+    border-radius: 8px;
+    background: #f1f1f1;
+}
+
+.chart-item span {
+    font-weight: bold;
+}
+
+.chart-item strong {
+    font-size: 20px;
+}
+/* AI Severity Badge */
+
+.severity-badge {
+    display: inline-block;
+    padding: 6px 12px;
+    margin-left: 5px;
+    border-radius: 20px;
+    font-weight: bold;
+    font-size: 14px;
+}
+
+.severity-badge.severity-critical {
+    background: #fee2e2;
+    color: #b91c1c;
+}
+
+.severity-badge.severity-high {
+    background: #ffedd5;
+    color: #c2410c;
+}
+
+.severity-badge.severity-medium {
+    background: #fef9c3;
+    color: #a16207;
+}
+
+.severity-badge.severity-low {
+    background: #dcfce7;
+    color: #15803d;
+}
